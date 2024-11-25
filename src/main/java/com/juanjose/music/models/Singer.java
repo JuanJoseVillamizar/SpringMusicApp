@@ -19,6 +19,14 @@ public class Singer {
     @OneToMany(mappedBy = "song", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Song> songs = new ArrayList<>();
 
+    public Singer(){}
+
+    public Singer(String name, String country, Genre genre) {
+        this.name = name;
+        this.country = country;
+        this.genre = genre;
+    }
+
     public Long getId() {
         return id;
     }

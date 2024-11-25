@@ -13,6 +13,13 @@ public class Song {
     @ManyToOne()
     private Singer singer;
 
+    public Song(){}
+
+    public Song(String title, int releaseYear, Singer singer) {
+        this.title = title;
+        this.releaseYear = releaseYear;
+        this.singer = singer;
+    }
 
     public Long getId() {
         return Id;
