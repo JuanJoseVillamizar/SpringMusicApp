@@ -52,4 +52,12 @@ public class Song {
     public void setSinger(Singer singer) {
         this.singer = singer;
     }
+
+    @Override
+    public String toString() {
+        return "Song: " +
+                "title:'" + title + '\'' +
+                ", releaseYear:" + releaseYear +
+                ", singer:" + (singer != null ? singer.getName() : "No singer assigned");
+    }
 }

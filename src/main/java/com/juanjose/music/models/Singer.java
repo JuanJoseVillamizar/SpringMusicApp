@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name="singers")
@@ -16,7 +17,7 @@ public class Singer {
     private String country;
     @Enumerated(EnumType.STRING)
     private Genre genre;
-    @OneToMany(mappedBy = "song", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "singer", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Song> songs = new ArrayList<>();
 
     public Singer(){}
@@ -66,5 +67,18 @@ public class Singer {
     public void setSongs(List<Song> songs) {
         songs.forEach(e -> e.setSinger(this));
         this.songs = songs;
+    }
+
+    @Override
+    public String toString() {
+        String songTitles = songs.stream()
+                .map(Song::getTitle)
+                .limit(3)
+                .collect(Collectors.joining(", "));
+        return "Singer: " +
+                "name:'" + name + '\'' +
+                ", country:'" + country + '\'' +
+                ", genre:" + genre +
+                ", songs:[" + songTitles + "]";
     }
 }
